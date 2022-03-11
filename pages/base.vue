@@ -7,16 +7,23 @@
     <app-modal v-model="modal">
       <h1>hi</h1>
     </app-modal>
+    <app-button @click="showMessage" :variant="ButtonVariantEnum.secondary"
+      >show toast</app-button
+    >
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ButtonVariantEnum } from "~/types";
+import { ButtonVariantEnum, ToastEnum } from "~/types";
 export default defineComponent({
   setup() {
     const modal = ref(false);
-    return { ButtonVariantEnum, modal };
+    const { showToast } = useToast();
+    const showMessage = () => {
+      showToast({ message: "با موفقیت انجام شد.", type: ToastEnum.success });
+    };
+    return { ButtonVariantEnum, modal, showMessage };
   },
 });
 </script>
