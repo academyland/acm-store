@@ -9,6 +9,7 @@ module.exports = {
     "./plugins/**/*.{js,ts}",
     "./*.{vue,js}",
   ],
+  salfeList: ["btn-primary", "btn-accent", "btn-secondary"],
   theme: {
     aspectRatio: {
       40: "40",
