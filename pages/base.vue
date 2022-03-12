@@ -10,6 +10,9 @@
     <app-button @click="showMessage" :variant="ButtonVariantEnum.secondary"
       >show toast</app-button
     >
+    <app-text-input name="title" v-model="title"></app-text-input>
+    {{ title }}
+    <base-text-input v-model="title"></base-text-input>
   </div>
 </template>
 
@@ -23,7 +26,8 @@ export default defineComponent({
     const showMessage = () => {
       showToast({ message: "با موفقیت انجام شد.", type: ToastEnum.success });
     };
-    return { ButtonVariantEnum, modal, showMessage };
+    const title = ref("hi");
+    return { ButtonVariantEnum, modal, showMessage, title };
   },
 });
 </script>

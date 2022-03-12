@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72037e0b-dfb6-4d5e-a902-d9931ae849f0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/base.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/base.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +35,7 @@
       <option name="presentableId" value="Default" />
       <updated>1646841049913</updated>
       <workItem from="1646841053218" duration="177000" />
+      <workItem from="1647091582083" duration="711000" />
     </task>
     <servers />
   </component>
