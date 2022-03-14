@@ -4,5 +4,8 @@
 @layer components {
   body {
     @apply overflow-y-scroll;
+    direction: rtl;
+    @apply bg-gray-50 text-justify;
+    @apply text-gray-600;
   }
 }
