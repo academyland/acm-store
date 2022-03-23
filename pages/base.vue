@@ -10,9 +10,18 @@
     <app-button @click="showMessage" :variant="ButtonVariantEnum.secondary"
       >show toast</app-button
     >
+
     <app-text-input name="title" v-model="title"></app-text-input>
     {{ title }}
     <base-text-input v-model="title"></base-text-input>
+
+    <div class="py-5 min-h-[12rem]">
+      <app-collapse a="a" class="aaaaa">
+        <template #title> title of collapse </template>
+        <h2>content of collapse</h2>
+      </app-collapse>
+    </div>
+    <h2>hi</h2>
   </div>
 </template>
 

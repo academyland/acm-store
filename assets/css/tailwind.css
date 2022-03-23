@@ -8,4 +8,13 @@
     @apply bg-gray-50 text-justify;
     @apply text-gray-600;
   }
+  .t-row {
+    @apply flex flex-row items-center;
+  }
+  .t-col {
+    @apply flex flex-col;
+  }
+  .t-center {
+    @apply flex items-center justify-center;
+  }
 }
