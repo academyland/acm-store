@@ -21,7 +21,22 @@
         <h2>content of collapse</h2>
       </app-collapse>
     </div>
-    <h2>hi</h2>
+    <h2>menu</h2>
+    <div class="relative">
+      <button class="btn btn-primary no-animation" @click="openMenu">
+        open menu
+      </button>
+      <div class="bg-orange-200">
+        <div
+          class="absolute top-14 inset-x-0 h-0 invisible border rounded-box opacity-0 z-30 bg-white"
+          ref="target"
+        >
+          <ul class="p-4 space-y-1">
+            <li v-for="i in 3">item{{ i }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,7 +51,8 @@ export default defineComponent({
       showToast({ message: "با موفقیت انجام شد.", type: ToastEnum.success });
     };
     const title = ref("hi");
-    return { ButtonVariantEnum, modal, showMessage, title };
+    const { target, openMenu } = useMenu();
+    return { ButtonVariantEnum, modal, showMessage, title, target, openMenu };
   },
 });
 </script>
