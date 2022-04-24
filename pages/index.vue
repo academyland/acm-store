@@ -10,9 +10,11 @@
 </template>
 
 <script setup lang="ts">
+import { useFetchApi } from "~/composables/api/useFetchApi.ts";
+const $fetch = useFetchApi();
 const { data, pending, error, refresh } = useLazyAsyncData(
   "home-mountains",
-  () => $fetch("https://api.nuxtjs.dev/mountains"),
-  {}
+  () => $fetch("/course/index"),
+  { server: false }
 );
 </script>
