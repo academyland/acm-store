@@ -67,7 +67,6 @@
     </section>
   </div>
 </template>
-
 <script setup lang="ts">
 import { AcademicCapIcon, BeakerIcon, CodeIcon } from "@heroicons/vue/outline";
 import { gsap } from "gsap";
