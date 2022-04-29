@@ -61,7 +61,7 @@
     <section class="my-3 lg:mt-0 lg:mx-10">
       <app-slider :items="data">
         <template #item="item">
-          <div>{{ item.title }}</div>
+          <course-item :item="item" />
         </template>
       </app-slider>
     </section>

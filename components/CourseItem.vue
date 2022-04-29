@@ -1,5 +1,5 @@
 <template>
-  <router-link
+  <nuxt-link
     :to="to"
     class="group cursor-pointer block"
     :class="{ ['w-[19rem] lg:w-[22rem]']: hasDefaultWith }"
@@ -59,31 +59,22 @@
         </div>
       </div>
     </div>
-  </router-link>
+  </nuxt-link>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
-import { Course } from "~/composables/course/Course.interface";
 import { numberFormat } from "~/helpers/formatHelper";
 export default defineComponent({
   name: "CourseItem",
   props: {
     item: {
-      type: Object as PropType<Course>,
+      type: Object,
       required: true,
     },
     hasDefaultWith: {
       type: Boolean,
       default: true,
-    },
-    loading: {
-      type: Boolean,
-      required: true,
-    },
-    hasError: {
-      type: Boolean,
-      required: true,
     },
   },
   setup(props) {
@@ -97,10 +88,14 @@ export default defineComponent({
       }
       return numberFormat(props.item.amountOff) + " تومان ";
     });
+    // const showAmount = computed(() => {
+    //   return props.item.amountOff < props.item.amount;
+    // });
     return {
       numberFormat,
       to,
       getAmount,
+      // showAmount,
     };
   },
 });
