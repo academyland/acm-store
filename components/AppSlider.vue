@@ -5,13 +5,13 @@
         class="hidden lg:block absolute top-1/2 -right-5 transition translate--y-1/2"
         @click="clickPrev"
       >
-       <chevron-right-icon></chevron-right-icon>
+        <chevron-right-icon></chevron-right-icon>
       </button>
       <button
         class="hidden lg:block absolute top-1/2 -left-5 transition translate--y-1/2"
         @click="clickNext"
       >
-       <chevron-left-icon></chevron-left-icon>
+        <chevron-left-icon></chevron-left-icon>
       </button>
     </template>
     <div class="overflow-x-hidden">
@@ -33,16 +33,14 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-} from "vue";
+import { defineComponent } from "vue";
 import { gsap } from "gsap";
 import Draggable from "gsap/Draggable";
 import { useEventListener } from "@vueuse/core";
-import { ChevronLeftIcon,ChevronRightIcon } from "@heroicons/vue/outline";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/outline";
 export default defineComponent({
   name: "AppSlider",
-  components: {  ChevronLeftIcon,ChevronRightIcon },
+  components: { ChevronLeftIcon, ChevronRightIcon },
   props: {
     items: { type: Array, default: () => [] },
     arrows: {
@@ -72,9 +70,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const sliderWrapperRef = ref<HTMLElement | null>(null);
-    const childrenRef = ref<HTMLElement[]>([]);
-    const setChildrenRef = (el: HTMLElement, index: number) => {
+    const sliderWrapperRef = ref<any>(null);
+    const childrenRef = ref<any>([]);
+    const setChildrenRef = (el: any, index: number) => {
       if (el) childrenRef.value[index] = el;
     };
     onBeforeUpdate(() => {

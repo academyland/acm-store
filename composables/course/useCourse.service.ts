@@ -1,5 +1,4 @@
-import { plainToClass } from "class-transformer";
-import { useFetchApi } from "~/composables/api/useFetchApi.ts";
+import { useFetchApi } from "~/composables/api/useFetchApi";
 import { CourseDto } from "./course.dto";
 export const useCourseService = () => {
     const $fetch = useFetchApi<CourseDto>(CourseDto);

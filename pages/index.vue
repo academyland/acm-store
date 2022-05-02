@@ -71,10 +71,11 @@
 import { AcademicCapIcon, BeakerIcon, CodeIcon } from "@heroicons/vue/outline";
 import { gsap } from "gsap";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
-import { useCourseList } from "~/composables/course/useCourse.ts";
+import { useCourseList } from "~/composables/course/useCourse";
 const completeAnimation = ref(false);
 onMounted(() => {
   gsap.registerPlugin(ScrollToPlugin);
+  //@ts-ignore
   const tl = new gsap.timeline();
   tl.from(".g-head-anime", {
     ease: "power4",

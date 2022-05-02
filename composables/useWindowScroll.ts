@@ -8,8 +8,8 @@ import { useEventListener, useDebounceFn } from '@vueuse/core'
  */
 export function useWindowScroll({ debounceTime = 200 } = {}) {
     if (process.client) {
-        const x = ref(typeof window != undefined ? window.pageXOffset : 0)
-        const y = ref(typeof window != undefined ? window.pageXOffset : 0)
+        const x = ref(window.pageXOffset)
+        const y = ref(window.pageXOffset)
 
         const handleScroll = useDebounceFn(() => {
             x.value = window.pageXOffset
@@ -26,7 +26,7 @@ export function useWindowScroll({ debounceTime = 200 } = {}) {
 
         return { x, y }
     } else {
-        return { x: 0, y: 0 }
+        return { x: computed(() => 0), y: computed(() => 0) }
     }
 }
 
