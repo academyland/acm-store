@@ -60,7 +60,7 @@
     <h6 id="featured-courses" class="head text-center">دوره های آکادمی لند</h6>
     <section class="my-3 lg:mt-0 lg:mx-10">
       <app-slider :items="data">
-        <template #item="item">
+        <template #item="{ item }">
           <course-item :item="item" />
         </template>
       </app-slider>
@@ -96,6 +96,9 @@ const clickGetStart = () => {
   });
 };
 const { data, pending } = useCourseList();
+watchEffect(() => {
+  console.log("data", data.value);
+});
 </script>
 <style scoped lang="postcss">
 .g-head-anime {

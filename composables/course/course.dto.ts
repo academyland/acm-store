@@ -34,4 +34,8 @@ export class CourseDto extends BaseCourseDto {
     src: string
     @Expose()
     short_description: string
+    @Expose()
+    get showAmount() {
+        return this.amount > this.amountOff
+    }
 }

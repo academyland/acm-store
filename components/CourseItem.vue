@@ -62,41 +62,25 @@
   </nuxt-link>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { computed, defineComponent, PropType } from "vue";
 import { numberFormat } from "~/helpers/formatHelper";
-export default defineComponent({
-  name: "CourseItem",
-  props: {
-    item: {
-      type: Object,
-      required: true,
-    },
-    hasDefaultWith: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  setup(props) {
-    const to = computed(() => ({
-      name: "courses-slug",
-      params: { slug: props.item.slug },
-    }));
-    const getAmount = computed(() => {
-      if (props.item.amountOff === 0) {
-        return "رایگان";
-      }
-      return numberFormat(props.item.amountOff) + " تومان ";
-    });
-    // const showAmount = computed(() => {
-    //   return props.item.amountOff < props.item.amount;
-    // });
-    return {
-      numberFormat,
-      to,
-      getAmount,
-      // showAmount,
-    };
-  },
+import { CourseDto } from "~/composables/course/course.dto";
+interface Props {
+  item: CourseDto;
+  hasDefaultWith?: boolean;
+}
+const props = withDefaults(defineProps<Props>(), {
+  hasDefaultWith: true,
+});
+const to = computed(() => ({
+  name: "courses-slug",
+  params: { slug: props.item.slug },
+}));
+const getAmount = computed(() => {
+  if (props.item.amountOff === 0) {
+    return "رایگان";
+  }
+  return numberFormat(props.item.amountOff) + " تومان ";
 });
 </script>

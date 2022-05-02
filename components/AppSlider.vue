@@ -24,7 +24,7 @@
               itemContainerClass,
             ]"
           >
-            <slot name="item" v-bind="item" :index="index" />
+            <slot name="item" :item="item" :index="index" />
           </div>
         </template>
       </div>
