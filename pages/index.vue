@@ -56,7 +56,6 @@
         </template>
       </service>
     </section>
-
     <h6 id="featured-courses" class="head text-center">دوره های آکادمی لند</h6>
     <section class="my-3 lg:mt-0 lg:mx-10">
       <app-slider :items="data">
