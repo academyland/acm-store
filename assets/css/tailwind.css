@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "siteFont";
+  src: url("../fonts/IRANSansWeb.woff");
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,8 +9,15 @@
   body {
     @apply overflow-y-scroll;
     direction: rtl;
+    font-family: "siteFont", serif !important;
     @apply bg-gray-50 text-justify;
     @apply text-gray-600;
+  }
+  .text-link {
+    @apply text-blue-600 hover:text-blue-700 !important;
+  }
+  .text-body {
+    @apply text-gray-600 !important;
   }
   .t-row {
     @apply flex flex-row items-center;
@@ -16,5 +27,71 @@
   }
   .t-center {
     @apply flex items-center justify-center;
+  }
+  .position-center {
+    @apply absolute top-1/2 right-1/2 transform -translate-y-1/2 translate-x-1/2;
+  }
+  .layout-padding {
+    @apply px-3 lg:px-0;
+  }
+  .head {
+    @apply w-full my-3 font-black prose-lg;
+  }
+  .content-container {
+    @apply px-3 sm:px-12 lg:px-24 my-4 lg:my-6;
+  }
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+:root {
+  --ideal-font-size: 16;
+  --ideal-viewport-width: 1280;
+  --current-viewport-width: 100vw;
+
+  --tablet-ideal-font-size: 16;
+  --tablet-ideal-viewport-width: 768;
+  --tablet-current-viewport-width: 100vw;
+
+  --mobile-ideal-font-size: 15;
+  --mobile-ideal-viewport-width: 360;
+  --mobile-current-viewport-width: 100vw;
+}
+
+html {
+  font-size: calc(
+    var(--mobile-ideal-font-size) *
+      (
+        var(--mobile-current-viewport-width) /
+          var(--mobile-ideal-viewport-width)
+      )
+  );
+}
+
+@screen sm {
+  html {
+    font-size: calc(
+      var(--tablet-ideal-font-size) *
+        (
+          var(--tablet-current-viewport-width) /
+            var(--tablet-ideal-viewport-width)
+        )
+    );
+  }
+}
+@screen lg {
+  html {
+    font-size: calc(
+      var(--ideal-font-size) *
+        (var(--current-viewport-width) / var(--ideal-viewport-width))
+    );
   }
 }
