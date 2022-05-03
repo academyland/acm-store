@@ -2,12 +2,12 @@ import { ClassConstructor, plainToClass } from "class-transformer"
 import { FetchOptions } from "ohmyfetch"
 import { BASE_URL } from "./api.config"
 
-export const useFetchApi = <T>(classTransformer: ClassConstructor<T> = null) => {
+export const useFetchApi = <T, R>(classTransformer: ClassConstructor<T> = null as unknown as ClassConstructor<T>) => {
     const myCustomFetch = (url: string, config: FetchOptions) => {
         config = { baseURL: BASE_URL, ...config }
-        return $fetch(url, config).then((response) => {
+        return $fetch<R>(url, config).then((response) => {
             if (classTransformer != null) {
-                return plainToClass(classTransformer, response, { excludeExtraneousValues: true })
+                return plainToClass(classTransformer, response, { excludeExtraneousValues: true }) as unknown as R
             }
             return response
         })

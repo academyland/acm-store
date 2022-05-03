@@ -4,7 +4,7 @@ import { PROXY_CONFIG } from './composables/api/api.config'
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
     css: ["@/assets/css/tailwind.css"],
-    typescript: { typeCheck: true },
+    typescript: { typeCheck: true, strict: true },
     build: {
         postcss: {
             postcssOptions: require("./postcss.config.js"),

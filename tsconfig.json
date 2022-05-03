@@ -5,5 +5,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "experimentalDecorators": true,
+    "strictPropertyInitialization":false,
+    "noImplicitAny":false
   }
 }
