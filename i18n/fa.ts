@@ -1,5 +1,8 @@
 export default {
     messages: {
-        login: 'ورود'
+        login: 'ورود',
+        username: 'نام کاربری',
+        password: 'کلمه عبور',
+        email: 'ایمیل'
     }
 }
