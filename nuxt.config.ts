@@ -5,6 +5,9 @@ import { PROXY_CONFIG } from './composables/api/api.config'
 export default defineNuxtConfig({
     css: ["@/assets/css/tailwind.css"],
     typescript: { typeCheck: true, strict: true },
+    buildModules: [
+        '@pinia/nuxt',
+    ],
     build: {
         postcss: {
             postcssOptions: require("./postcss.config.js"),
