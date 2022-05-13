@@ -1,5 +1,5 @@
 <template>
-  <Form @submit="submit">
+  <Form :validation-schema="schema" @submit="submit">
     <!-- <app-error center :message="error" class="mt-1 mb-4"></app-error> -->
     <app-text-input name="username" :label="$t('username')" />
     <app-text-input name="password" :label="$t('password')" type="password" />
@@ -26,12 +26,19 @@
 import { defineComponent } from "vue";
 import { Form } from "vee-validate";
 import { useLogin } from "~/composables/auth/login/useLogin";
+import { object, string } from "yup";
 const emit = defineEmits(["resetPassword"]);
 const resetPasswordClick = () => {
   emit("resetPassword");
 };
 const loading = ref(false);
-const submit = () => {
-  console.log("submit");
+const { $t } = useNuxtApp();
+const schema = object({
+  username: string().required().label($t("username")),
+  password: string().required().label($t("password")),
+});
+const submit = (values, { setErrors }) => {
+  console.log("submit", values);
+  setErrors({ username: "test" });
 };
 </script>
