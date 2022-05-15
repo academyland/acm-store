@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     },
     vite: {
         server: {
+            //@ts-ignore
             proxy: PROXY_CONFIG
             // proxy: {
             //     '/api': 'https://acm.academyland.net/'

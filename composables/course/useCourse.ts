@@ -5,7 +5,7 @@ export const useCourseList = () => {
     const { data, pending } = useLazyAsyncData(
         "home-mountains",
         () => getCourseListFromApi(),
-        { server: false }
+        { server: true }
     );
     return { data, pending }
 }

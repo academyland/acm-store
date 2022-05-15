@@ -23,9 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import { Form } from "vee-validate";
-import { useLogin } from "~/composables/auth/login/useLogin";
 import { object, string } from "yup";
 const emit = defineEmits(["resetPassword"]);
 const resetPasswordClick = () => {

@@ -2,7 +2,7 @@
   <div
     class="bg-white t-row border w-full lg:border-none lg:shadow lg:max-w-[20rem] rounded-box space-x-reverse space-x-5 p-4"
   >
-    <div class="w-16 h-16 text-secondary">
+    <div class="w-16 h-16 overflow-hidden text-secondary">
       <slot name="icon" />
     </div>
     <div class="space-y-2">

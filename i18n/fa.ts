@@ -3,6 +3,7 @@ export default {
         login: 'ورود',
         username: 'نام کاربری',
         password: 'کلمه عبور',
-        email: 'ایمیل'
+        email: 'ایمیل',
+        signup: 'ثبت نام'
     }
 }

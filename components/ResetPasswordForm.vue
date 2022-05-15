@@ -1,5 +1,5 @@
 <template>
-  <Form @submit="submit">
+  <Form :validation-schema="schema" @submit="submit">
     <app-text-input name="email" :label="$t('email')" />
     <app-button
       :loading="loading"
@@ -13,12 +13,11 @@
 
 <script lang="ts" setup>
 import { Form } from "vee-validate";
-import { useRequestPasswordReset } from "~/composables/auth/resetPassword/useResetPassword";
-import { resetPasswordGetInputProps } from "~/composables/auth/resetPassword/resetPassword.validator";
-import { defineComponent } from "vue";
-import { useRegister } from "~/composables/auth/register/useRegister";
-import { registerGetInputProps } from "~/composables/auth/register/register.validator";
-
+import { object, string } from "yup";
+const { $t } = useNuxtApp();
+const schema = object({
+  email: string().email().required().label($t("email")),
+});
 const loading = ref(false);
 const submit = () => {
   console.log("submit");
