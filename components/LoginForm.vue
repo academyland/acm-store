@@ -24,17 +24,13 @@
 
 <script lang="ts" setup>
 import { Form } from "vee-validate";
-import { object, string } from "yup";
+import { useLoginValidator } from "~~/composables/auth/login/login.validator";
 const emit = defineEmits(["resetPassword"]);
 const resetPasswordClick = () => {
   emit("resetPassword");
 };
 const loading = ref(false);
-const { $t } = useNuxtApp();
-const schema = object({
-  username: string().required().label($t("username")),
-  password: string().required().label($t("password")),
-});
+const { schema } = useLoginValidator();
 const submit = (values, { setErrors }) => {
   console.log("submit", values);
   setErrors({ username: "test" });
