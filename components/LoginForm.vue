@@ -1,6 +1,6 @@
 <template>
   <Form :validation-schema="schema" @submit="submit">
-    <!-- <app-error center :message="error" class="mt-1 mb-4"></app-error> -->
+    <app-error center :message="error" class="mt-1 mb-4"></app-error>
     <app-text-input name="username" :label="$t('username')" />
     <app-text-input name="password" :label="$t('password')" type="password" />
     <div class="w-full flex justify-end -mt-2 mb-2">
@@ -24,15 +24,12 @@
 
 <script lang="ts" setup>
 import { Form } from "vee-validate";
+import { useLogin } from "~~/composables/auth/login/useLogin";
 import { useLoginValidator } from "~~/composables/auth/login/login.validator";
 const emit = defineEmits(["resetPassword"]);
 const resetPasswordClick = () => {
   emit("resetPassword");
 };
-const loading = ref(false);
 const { schema } = useLoginValidator();
-const submit = (values, { setErrors }) => {
-  console.log("submit", values);
-  setErrors({ username: "test" });
-};
+const { loading, error, submit } = useLogin();
 </script>
