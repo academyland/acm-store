@@ -3,12 +3,12 @@ import { CLIENT_ID, CLIENT_SECRET } from "~~/composables/api/api.config";
 import { FetchCustomConfig } from "~~/composables/api/FetchCustomConfig.interface";
 import { useFetchApi } from "~~/composables/api/useFetchApi"
 import { AuthTokens, Identity } from "../Auth.interface"
+import { LoginDto } from "./Login.dto";
 import { useLoginValidator } from "./login.validator";
-
 export const useLoginService = () => {
-    const fetchData = useFetchApi()
+    const fetchData = useFetchApi<{ tokens: AuthTokens, identity: Identity }, LoginDto>(LoginDto)
     const { schema } = useLoginValidator()
-    const login = ({ username, password }: InferType<typeof schema>, customConfig: FetchCustomConfig = {}): Promise<{ tokens: AuthTokens, identity: Identity } | undefined> =>
+    const login = ({ username, password }: InferType<typeof schema>, customConfig: FetchCustomConfig = {}) =>
 
         fetchData("/oauth2/rest/token", {
             method: "post",

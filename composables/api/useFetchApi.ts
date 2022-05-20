@@ -1,11 +1,19 @@
 import { ClassConstructor, plainToInstance, instanceToPlain } from "class-transformer"
 import { FetchOptions } from "ohmyfetch"
+import { useAuthStore } from "../auth/Auth.store"
 import { BASE_URL } from "./api.config"
 import { FetchCustomConfig } from "./FetchCustomConfig.interface"
-
-export const useFetchApi = <T, R>(classTransformer: ClassConstructor<T> = null as unknown as ClassConstructor<T>) => {
+import "reflect-metadata"
+export const useFetchApi = <R, T = {}>(classTransformer: ClassConstructor<T> = null as unknown as ClassConstructor<T>) => {
     const myCustomFetch = (url: string, config: FetchOptions, customConfig: FetchCustomConfig = {}) => {
         config = { baseURL: BASE_URL, ...config }
+        const authStore = useAuthStore();
+        if (customConfig.setToken) {
+            if (!config.headers) {
+                config.headers = {}
+            }
+            config.headers['Authorization'] = `Bearer ${authStore.getToken}`
+        }
         return $fetch<R>(url, config).then((response) => {
             if (classTransformer != null) {
                 return instanceToPlain(plainToInstance(classTransformer, response, { excludeExtraneousValues: true })) as unknown as R
