@@ -1,9 +1,11 @@
 import { ToastEnum } from "~~/types";
 import { useAuthStore } from "../Auth.store";
 import { useLoginService } from "./login.service";
+import { useLoginDialog } from "./useLoginDialog";
 
 export const useLogin = () => {
     const loading = ref(false);
+    const { loginCallback, loginModel } = useLoginDialog()
     const { login } = useLoginService();
     const store = useAuthStore();
     const error = ref("");
@@ -21,10 +23,13 @@ export const useLogin = () => {
         error.value = "";
         login(values, { ignoreErrors: true, onError })
             .then((response) => {
-                console.log("then", response);
                 if (response != undefined) {
                     store.setToken(response.tokens);
                     store.setIdentity(response.identity);
+                    if (typeof unref(loginCallback) == 'function') {
+                        unref(loginCallback)(response)
+                    }
+                    loginModel.value = false;
                     showToast({ message: 'به آکادمی لند خوش آمدید.', type: ToastEnum.success })
                     router.replace('/')
                 }
