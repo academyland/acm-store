@@ -1,5 +1,9 @@
 <template>
-  <Form :validation-schema="schema" @submit="submit">
+  <Form
+    :validation-schema="schema"
+    @submit="submit"
+    :initial-values="{ username: 'admin', password: 'admin' }"
+  >
     <app-error center :message="error" class="mt-1 mb-4"></app-error>
     <app-text-input name="username" :label="$t('username')" />
     <app-text-input name="password" :label="$t('password')" type="password" />
