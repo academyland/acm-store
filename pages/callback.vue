@@ -1,10 +1,8 @@
 <template>
-  <client-only>
-    <div>
-      <h1>callback</h1>
-      <nuxt-link to="/">home</nuxt-link>
-    </div>
-  </client-only>
+  <div>
+    <h1>callback</h1>
+    <nuxt-link to="/">home</nuxt-link>
+  </div>
 </template>
 <script lang="ts" setup>
 onMounted(() => {
