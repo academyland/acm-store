@@ -37,7 +37,10 @@ import { defineComponent } from "vue";
 import { gsap } from "gsap";
 import Draggable from "gsap/Draggable";
 import { useEventListener } from "@vueuse/core";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/outline";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@heroicons/vue/outline/index.js";
 export default defineComponent({
   name: "AppSlider",
   components: { ChevronLeftIcon, ChevronRightIcon },

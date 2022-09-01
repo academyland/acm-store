@@ -9,13 +9,13 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.1",
     "autoprefixer": "^10.4.2",
-    "nuxt": "3.0.0-rc.3",
+    "nuxt": "3.0.0-rc.8",
     "postcss": "^8.4.6",
     "tailwindcss": "^3.0.18"
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.5",
-    "@pinia/nuxt": "^0.1.9",
+    "@pinia/nuxt": "^0.4.1",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/line-clamp": "^0.3.1",
     "@vueuse/core": "^7.6.1",

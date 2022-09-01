@@ -67,7 +67,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { AcademicCapIcon, BeakerIcon, CodeIcon } from "@heroicons/vue/outline";
+import {
+  AcademicCapIcon,
+  BeakerIcon,
+  CodeIcon,
+} from "@heroicons/vue/outline/index.js";
 import { gsap } from "gsap";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import { useCourseList } from "~/composables/course/useCourse";
@@ -97,9 +101,9 @@ const clickGetStart = () => {
   });
 };
 const { data, pending } = useCourseList();
-watchEffect(() => {
-  console.log("data", data.value);
-});
+// watchEffect(() => {
+//   console.log("data", data.value);
+// });
 </script>
 <style scoped lang="postcss">
 .g-head-anime {

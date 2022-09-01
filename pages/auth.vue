@@ -6,7 +6,7 @@
       'px-3': isDialog,
     }"
   >
-    <div class="mx-auto w-min ">
+    <div class="mx-auto w-min">
       <user-icon class="w-28 h-28 text-secondary"> </user-icon>
     </div>
     <login-form
@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { LoginStep } from "~/composables/auth/Auth.enum";
-import { UserIcon } from "@heroicons/vue/outline";
+import { UserIcon } from "@heroicons/vue/outline/index.js";
 interface Props {
   isDialog?: boolean;
 }
