@@ -1,6 +1,7 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { AuthState, Identity, AuthTokens } from '~/composables/auth/Auth.interface';
 import { useIdentityService } from './identity.service';
+import { useRefreshTokenService } from './useRefreshToken.service';
 const defaultState = (): AuthState => ({
     accessToken: null,
     refreshToken: null,
@@ -65,6 +66,19 @@ export const useAuthStore = defineStore('auth', {
         },
         setIdentity(identity: Identity) {
             this.identity = identity
+        },
+        doRefreshToken() {
+            this.isRefreshing = true;
+            const service = useRefreshTokenService();
+            return service(this.refreshToken!).then((response) => {
+                if (response != undefined) {
+                    this.setToken(response.tokens, true);
+                    this.isRefreshSuccess = true;
+                    return response;
+                }
+            }).finally(() => {
+                this.isRefreshing = false;
+            })
         }
     },
 })
