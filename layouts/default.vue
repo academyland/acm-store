@@ -1,17 +1,21 @@
 <template>
   <div>
     <div>
-      <client-only>
+      <!-- <client-only>
         <template v-if="authStore.isLoggedIn">
           <span>{{ authStore.getFullName }}</span>
           <button @click="logout">خروج</button>
         </template>
         <button v-else @click="() => open()">ورود/ثبت نام</button>
-      </client-only>
+      </client-only> -->
     </div>
-
-    <nuxt-page></nuxt-page>
-    <footer>footer from layout default</footer>
+    <section class="t-col min-h-screen">
+      <the-menu />
+      <div class="flex flex-col flex-1">
+        <nuxt-page></nuxt-page>
+      </div>
+      <footer>footer from layout default</footer>
+    </section>
   </div>
 </template>
 
