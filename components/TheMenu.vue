@@ -5,7 +5,23 @@
       class="t-row justify-between px-10 py-2.5 3xl:text-sm bg-white shadow-lg"
     >
       <section>
-        <!-- TODO implement menu -->
+        <button class="lg:hidden block" @click="toggleMenu">
+          <the-menu-toggle-icon />
+        </button>
+        <div
+          ref="target"
+          v-bind="$attrs"
+          class="rounded-box lg:rounded-none border lg:border-none shadow-lg lg:shadow-none absolute z-20 mt-3 lg:mt-0 bg-white inset-x-10 text-base-content divide-y divide-gray-200 lg:divide-y-0 lg:bg-transparent lg:static flex flex-col items-start h-0 lg:h-auto invisible lg:visible lg:flex lg:flex-row lg:items-center lg:space-x-reverse lg:space-x-2"
+        >
+          <router-link
+            v-for="(item, index) in links"
+            :key="`menu-${index}`"
+            :to="item.to"
+            class="w-full lg:w-auto py-3 pr-4 cursor-pointer"
+          >
+            {{ item.title }}
+          </router-link>
+        </div>
       </section>
       <section class="t-row">
         <client-only>
@@ -55,8 +71,8 @@ const links = [
   },
 ];
 const { toggleMenu, target } = useMenu();
-// const disable = useEnableByRoute([{ name: "courses-slug" }]);
-// const { isFixed } = useFixMenu("#the-menu", disable);
+const disable = useEnableByRoute([{ name: "courses-slug" }]);
+useFixMenu("#the-menu", disable);
 const authStore = useAuthStore();
 const { open } = useLoginDialog();
 </script>
