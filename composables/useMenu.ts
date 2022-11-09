@@ -46,7 +46,7 @@ export const useMenu = () => {
     menuAnimation?.reverse();
   });
   const route = useRoute()
-  watch(() => route.path, () => {
+  watch(() => route?.path, () => {
     removeProps()
     setAnimation();
   })
