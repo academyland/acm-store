@@ -3,7 +3,11 @@
     <section class="grid bg-[#220241] lg:grid-cols-3">
       <div class="aspect-w-40 aspect-h-21 drop-shadow-lg filter blur-[4px]">
         <figure class="overflow-hidden">
-          <img class="w-full h-full" loading="lazy" src="#" />
+          <img
+            class="w-full h-full"
+            loading="lazy"
+            src="https://academyland.net/api/web/images/courses/store-vue-nuxt.png"
+          />
         </figure>
       </div>
       <div
