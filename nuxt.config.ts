@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from 'nuxt'
 import { PROXY_CONFIG } from './composables/api/api.config'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config

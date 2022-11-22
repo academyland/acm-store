@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div v-if="pending">loading...</div>
+  <div v-else-if="data">
     <section class="grid bg-[#220241] lg:grid-cols-3">
       <div class="aspect-w-40 aspect-h-21 drop-shadow-lg filter blur-[4px]">
         <figure class="overflow-hidden">
@@ -14,7 +15,7 @@
         class="py-4 lg:py-0 my-auto space-y-3 lg:space-y-4 t-col items-center text-center"
       >
         <h1 class="font-bold prose-2xl text-white">
-          پیاده سازی فروشگاه با vue و nuxt 3
+          {{ data.title }}
         </h1>
         <div class="t-row">
           <div class="badge badge-secondary badge-lg text-xs">در حال ضبط</div>
@@ -169,21 +170,18 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { CourseTabs } from "~/composables/course/Course.const";
 import { useLoginDialog } from "~~/composables/auth/login/useLoginDialog";
 import { useAuthStore } from "~~/composables/auth/Auth.store";
-export default defineComponent({
-  setup() {
-    const { open: openLoginDialog } = useLoginDialog();
-    const authStore = useAuthStore();
-    return {
-      CourseTabs,
-      authStore,
-      openLoginDialog,
-    };
-  },
+import { useCourseDetail } from "~~/composables/course/useCourseDetail";
+
+const { open: openLoginDialog } = useLoginDialog();
+const authStore = useAuthStore();
+const route = useRoute();
+const { data, pending } = useCourseDetail(route.params.slug as string);
+watchEffect(() => {
+  console.log("data", data.value);
 });
 </script>
 <style scoped>
