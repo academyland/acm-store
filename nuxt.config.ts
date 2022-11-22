@@ -4,22 +4,20 @@ import { PROXY_CONFIG } from './composables/api/api.config'
 export default defineNuxtConfig({
     css: ["@/assets/css/tailwind.css"],
     // typescript: { typeCheck: true, strict: true },
-    buildModules: [
+    modules: [
         '@pinia/nuxt',
     ],
-    build: {
-        postcss: {
-            postcssOptions: require("./postcss.config.js"),
+    postcss: {
+        plugins: {
+            tailwindcss: {},
+            autoprefixer: {},
         },
-        transpile: ['gsap'],
     },
-    vite: {
-        server: {
-            //@ts-ignore
-            proxy: PROXY_CONFIG
-            // proxy: {
-            //     '/api': 'https://acm.academyland.net/'
-            // }
-        }
+    build: {
+        transpile: ['gsap']
+    },
+
+    nitro: {
+        devProxy: PROXY_CONFIG
     }
 })
