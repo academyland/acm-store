@@ -30,6 +30,13 @@ const props = withDefaults(
 );
 const route = useRoute();
 const router = useRouter();
+const activeHash = ref(route.hash || "");
+const updateHash = (id) => {
+  if (process.client) {
+    window.history.pushState(null, "", "#" + id);
+    activeHash.value = "#" + id;
+  }
+};
 onMounted(() => {
   gsap.registerPlugin(ScrollToPlugin);
   if (route.hash) {
@@ -41,7 +48,8 @@ onMounted(() => {
 });
 let scrollTo: any;
 const scrollToID = (id: string) => {
-  router.replace({ hash: "#" + id });
+  // router.replace({ hash: "#" + id });
+  updateHash(id);
   scrollTo = gsap.to(window, {
     duration: 1,
     scrollTo: { y: "#" + id, offsetY: props.offset, autoKill: true },
@@ -53,16 +61,19 @@ watch(y, () => {
     const item = props.items[i];
     const el = document.getElementById(item.id);
     if (el && el?.getBoundingClientRect().top <= props.offset + 2) {
-      router.replace({ hash: "#" + item.id });
+      // router.replace({ hash: "#" + item.id });
+      updateHash(item.id);
       return;
     }
     if (i == 0) {
-      router.replace({ hash: "" });
+      updateHash("");
+      // router.replace({ hash: "" });
     }
   }
 });
 const activeItemIndex = computed(() => {
-  return props.items.findIndex((item) => "#" + item.id === route.hash);
+  // return props.items.findIndex((item) => "#" + item.id === route.hash);
+  return props.items.findIndex((item) => "#" + item.id === unref(activeHash));
 });
 </script>
 

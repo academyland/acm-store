@@ -5,7 +5,7 @@ export const useCourseDetail = (slug: string) => {
     const { data, pending } = useLazyAsyncData(
         "course-detail" + slug,
         () => getCourseDetail(slug),
-        // { server: false }
+        { server: true }
     );
     return { data, pending }
 }
