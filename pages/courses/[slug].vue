@@ -174,15 +174,20 @@
 import { CourseTabs } from "~/composables/course/Course.const";
 import { useLoginDialog } from "~~/composables/auth/login/useLoginDialog";
 import { useAuthStore } from "~~/composables/auth/Auth.store";
-import { useCourseDetail } from "~~/composables/course/useCourseDetail";
+import {
+  useCanBuyConsumer,
+  useCourseDetail,
+} from "~~/composables/course/useCourseDetail";
 
 const { open: openLoginDialog } = useLoginDialog();
 const authStore = useAuthStore();
 const route = useRoute();
 const { data, pending } = useCourseDetail(route.params.slug as string);
-watchEffect(() => {
-  console.log("data", data.value);
-});
+// const { canBuy, loading } = useCanBuyConsumer();
+// watchEffect(() => {
+//   console.log("data", data.value);
+//   console.log("canBuy", unref(canBuy), unref(loading));
+// });
 </script>
 <style scoped>
 .course-cover {

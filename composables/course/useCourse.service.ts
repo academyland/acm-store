@@ -1,3 +1,4 @@
+import { bool } from "yup";
 import { useFetchApi } from "~/composables/api/useFetchApi";
 import { CourseDto } from "./course.dto";
 import { CourseDetailDto } from "./courseDetail.dto";
@@ -8,4 +9,9 @@ export const useCourseService = () => {
 export const useCourseDetailService = () => {
     const $fetch = useFetchApi<CourseDetailDto, CourseDetailDto>(CourseDetailDto);
     return (slug: string) => $fetch("/course/view", { params: { slug, expand: "courseDuration,computedEstimateDuration,statusText,src,courseQuestions,courseChapters.courseVideos.duration" } })
+}
+
+export const useIsUserInTheCourseService = () => {
+    const $fetch = useFetchApi<Boolean>();
+    return (id: number) => $fetch("/course-videos/is-user-in-the-course", { params: { id } }, { setToken: true }).then((response) => !!response)
 }
