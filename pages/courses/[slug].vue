@@ -4,11 +4,7 @@
     <section class="grid bg-[#220241] lg:grid-cols-3">
       <div class="aspect-w-40 aspect-h-21 drop-shadow-lg filter blur-[4px]">
         <figure class="overflow-hidden">
-          <img
-            class="w-full h-full"
-            loading="lazy"
-            src="https://academyland.net/api/web/images/courses/store-vue-nuxt.png"
-          />
+          <img class="w-full h-full" loading="lazy" :src="data.src" />
         </figure>
       </div>
       <div
@@ -18,7 +14,9 @@
           {{ data.title }}
         </h1>
         <div class="t-row">
-          <div class="badge badge-secondary badge-lg text-xs">در حال ضبط</div>
+          <div class="badge badge-secondary badge-lg text-xs">
+            {{ data.statusText }}
+          </div>
         </div>
       </div>
     </section>
@@ -37,17 +35,7 @@
             </h6>
             <article>
               <p>
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
-                در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد
-                نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
-                کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان
-                جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را
-                برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در
-                زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و
-                دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد و
-                زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات
-                پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                {{ data.description }}
               </p>
             </article>
           </div>
@@ -58,10 +46,7 @@
               پیش نیازهای دوره
             </h6>
             <p>
-              html , css و تسلط بر جاوا اسکریپت. شروع دوره از صفر هست و نیاز به
-              هیچ پیش ضمینه ای از فریم ورک های جاوا اسکریپت ندارد هرچند آشنایی
-              با این فریم ورک ها در درک هرچه بهتر مسائل کمک می کند اما اجباری
-              نیست.
+              {{ data.requirements }}
             </p>
           </div>
         </div>
@@ -70,7 +55,7 @@
             <h6 :id="CourseTabs[2].id" class="card-title text-secondary">
               لیست ویدئوهای دوره
             </h6>
-            <template v-if="true">
+            <template v-if="hasChapter">
               <div class="h-20">لیست ویدئوهای دوره در اینجا قرار می گیرد</div>
             </template>
             <template v-else>
@@ -118,27 +103,32 @@
         <section class="bg-white border rounded-box p-4">
           <div class="t-row justify-between p-3">
             <span class="block font-medium prose-sm">قیمت دوره</span>
-            <span class="block"> 869,000 تومان </span>
+            <span class="block"> {{ numberFormat(data.amountOff) }}</span>
           </div>
-          <div v-if="true" class="t-row justify-between p-3">
+          <div v-if="data.courseDuration" class="t-row justify-between p-3">
             <span class="block font-medium prose-sm">مدت زمان دوره</span>
-            <span class="block" dir="ltr">12 : 20 : 15</span>
+            <span class="block" dir="ltr">{{ data.courseDuration }}</span>
           </div>
-          <div v-if="true" class="t-row justify-between p-3">
+          <div
+            v-if="data.computedEstimateDuration"
+            class="t-row justify-between p-3"
+          >
             <span class="block font-medium prose-sm"
               >مدت زمان تقریبی دوره (پس از تکمیل)</span
             >
-            <span class="block">20 ساعت</span>
+            <span class="block">{{ data.computedEstimateDuration }}</span>
           </div>
-          <div v-if="true" class="t-row justify-between p-3">
+          <div v-if="data.totalVideoCount" class="t-row justify-between p-3">
             <span class="block font-medium prose-sm">تعداد قسمت ها</span>
-            <span class="block"> 70 </span>
+            <span class="block"> {{ data.totalVideoCount }} </span>
           </div>
           <div class="t-row justify-between p-3">
             <span class="block font-medium prose-sm">تعداد شرکت کننده گان</span>
-            <span class="block"> 120</span>
+            <span class="block"> {{ data.userCounter }}</span>
           </div>
-          <client-only> دکمه پرداخت و ثبت نام دوره </client-only>
+          <client-only
+            ><course-pay-button :course-id="data.id"></course-pay-button
+          ></client-only>
         </section>
 
         <section class="bg-white border rounded-box p-4">
@@ -174,15 +164,14 @@
 import { CourseTabs } from "~/composables/course/Course.const";
 import { useLoginDialog } from "~~/composables/auth/login/useLoginDialog";
 import { useAuthStore } from "~~/composables/auth/Auth.store";
-import {
-  useCanBuyConsumer,
-  useCourseDetail,
-} from "~~/composables/course/useCourseDetail";
+import { useCourseDetail } from "~~/composables/course/useCourseDetail";
+import { numberFormat } from "~~/helpers/formatHelper";
 
 const { open: openLoginDialog } = useLoginDialog();
 const authStore = useAuthStore();
 const route = useRoute();
 const { data, pending } = useCourseDetail(route.params.slug as string);
+const hasChapter = computed(() => unref(data)?.courseChapters?.length! > 0);
 // const { canBuy, loading } = useCanBuyConsumer();
 // watchEffect(() => {
 //   console.log("data", data.value);

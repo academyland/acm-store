@@ -8,7 +8,7 @@ export const useCourseService = () => {
 }
 export const useCourseDetailService = () => {
     const $fetch = useFetchApi<CourseDetailDto, CourseDetailDto>(CourseDetailDto);
-    return (slug: string) => $fetch("/course/view", { params: { slug, expand: "courseDuration,computedEstimateDuration,statusText,src,courseQuestions,courseChapters.courseVideos.duration" } })
+    return (slug: string) => $fetch("/course/view", { params: { slug, expand: "courseDuration,computedEstimateDuration,statusText,src,courseQuestions,courseChapters.courseVideos.duration,userCounter" } })
 }
 
 export const useIsUserInTheCourseService = () => {

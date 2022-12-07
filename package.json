@@ -22,6 +22,7 @@
     "class-transformer": "^0.5.1",
     "daisyui": "^1.25.4",
     "gsap": "^3.9.1",
+    "querystringify": "^2.2.0",
     "reflect-metadata": "^0.1.13",
     "vee-validate": "^4.5.8",
     "yup": "^0.32.11"

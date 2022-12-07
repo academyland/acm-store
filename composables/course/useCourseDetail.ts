@@ -23,20 +23,23 @@ const useCanBuyProvider = (courseID: Ref<number | undefined>) => {
     provide<CAN_BUY>('canBuy', userCanBuy)
 }
 export const useCanBuyConsumer = () => {
-    const inTheCourse = inject<CAN_BUY>('canBuy')
-    if (inTheCourse == undefined) {
+    const userCanBuy = inject<CAN_BUY>('canBuy')
+    if (userCanBuy == undefined) {
         throw new Error("canBuy inject is undefined in useCanBuyConsumer")
     }
-    return toRefs(inTheCourse!)
+    return toRefs(userCanBuy!)
 }
 export const useCourseDetail = (slug: string) => {
     const getCourseDetail = useCourseDetailService();
     const { data, pending } = useLazyAsyncData(
         "course-detail" + slug,
         () => getCourseDetail(slug),
-        { server: true }
+        { server: false }
     );
     const courseID = computed(() => unref(data)?.id)
     useCanBuyProvider(courseID);
+    watchEffect(() => {
+        console.log("data", data.value)
+    })
     return { data, pending }
 }

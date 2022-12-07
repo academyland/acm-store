@@ -23,13 +23,35 @@ export class CourseDetailDto extends BaseCourseDto {
     }, { toClassOnly: true })
     computedEstimateDuration: string;
     @Expose()
+    @Transform(({ value, obj }) => {
+        let i = 0;
+        const courseChapters = value.map((chapter) => {
+            return {
+                ...chapter,
+                courseVideos: chapter.courseVideos.map((video) => {
+                    i++;
+                    return {
+                        ...video,
+                        rowNumber: i
+                    }
+                })
+            }
+
+        })
+        obj.totalVideoCount = i;
+        return courseChapters;
+    }, { toClassOnly: true })
     courseChapters: CourseChapter[];
+    @Expose()
+    totalVideoCount: number
     @Expose()
     courseQuestions: CourseQuestion[];
     @Expose()
     src: string;
     @Expose()
     statusText: string;
+    @Expose()
+    userCounter: number;
 }
 
 
@@ -57,6 +79,8 @@ export class CourseVideo {
     hasFile: boolean;
     @Expose()
     duration: any;
+    @Expose()
+    rowNumber: number;
 }
 
 export class CourseChapter {

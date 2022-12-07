@@ -18,7 +18,8 @@ export const useFetchApi = <R, T = {}>(classTransformer: ClassConstructor<T> = n
         }
         return $fetch<R>(url, config).then((response) => {
             if (classTransformer != null) {
-                return instanceToPlain(plainToInstance(classTransformer, response, { excludeExtraneousValues: true })) as unknown as R
+                const instance = plainToInstance(classTransformer, response, { excludeExtraneousValues: true })
+                return instanceToPlain(instance) as unknown as R
             }
             return response
         }).catch((e) => {
