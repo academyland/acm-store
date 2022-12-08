@@ -1,6 +1,9 @@
 import { useIsUserInTheCourseService, useCourseDetailService } from "./useCourse.service";
 import { Ref } from "vue"
 import { useAuthStore } from "../auth/Auth.store";
+import { CourseVideo } from "./courseDetail.dto";
+import { BASE_URL } from "../api/api.config";
+import qs from "querystringify";
 type CAN_BUY = { loading: boolean, canBuy: boolean }
 const useCanBuyProvider = (courseID: Ref<number | undefined>) => {
     const fetchIsInTheCourse = useIsUserInTheCourseService()
@@ -42,4 +45,27 @@ export const useCourseDetail = (slug: string) => {
         console.log("data", data.value)
     })
     return { data, pending }
+}
+export const useVideoItem = (item: Ref<CourseVideo>) => {
+    const authStore = useAuthStore();
+    const userCanBuy = inject<CAN_BUY>("canBuy");
+    const isLocked = computed(
+        () => userCanBuy?.canBuy && !unref(item).isDemo
+    );
+
+    const getDownloadLink = computed(() => {
+        return (
+            BASE_URL +
+            '/site/download?' +
+            qs.stringify(
+                {
+                    key: authStore.getToken,
+                    v: unref(item).id,
+                    id: unref(item).course_id,
+                },
+                false
+            )
+        )
+    })
+    return { isLocked, getDownloadLink }
 }

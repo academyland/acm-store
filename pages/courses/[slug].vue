@@ -56,7 +56,11 @@
               لیست ویدئوهای دوره
             </h6>
             <template v-if="hasChapter">
-              <div class="h-20">لیست ویدئوهای دوره در اینجا قرار می گیرد</div>
+              <course-chapter-item
+                v-for="item in data?.courseChapters"
+                :item="item"
+                :key="`chapter-${item.id}`"
+              />
             </template>
             <template v-else>
               <p>هنوز ویدئویی منتشر نشده است.</p>
@@ -69,7 +73,12 @@
             <h6 :id="CourseTabs[3].id" class="card-title text-secondary">
               پرسش های متداول
             </h6>
-            <div class="h-10">لیست سوالات متداول در اینجا قرار می گیرد</div>
+            <template
+              v-for="question in data.courseQuestions"
+              :key="`question-${question.id}`"
+            >
+              <course-faqs :item="question" />
+            </template>
           </div>
         </div>
 
@@ -94,7 +103,7 @@
                 </template>
               </div>
 
-              <div class="h-10">نظرات کاربران اینجا قرار می گیرد</div>
+              <course-comments :course-id="data.id"></course-comments>
             </div>
           </div>
         </client-only>
