@@ -1,5 +1,6 @@
 import { ClassConstructor, plainToInstance, instanceToPlain } from "class-transformer"
-import { FetchError, FetchOptions } from "ohmyfetch"
+// import { FetchError, FetchOptions } from "ohmyfetch"
+import { FetchError, FetchOptions } from "ofetch"
 import { useAuthStore } from "../auth/Auth.store"
 import { BASE_URL } from "./api.config"
 import { FetchCustomConfig } from "./FetchCustomConfig.interface"
@@ -16,6 +17,7 @@ export const useFetchApi = <R, T = {}>(classTransformer: ClassConstructor<T> = n
             }
             config.headers['Authorization'] = `Bearer ${authStore.getToken}`
         }
+
         return $fetch<R>(url, config).then((response) => {
             if (classTransformer != null) {
                 const instance = plainToInstance(classTransformer, response, { excludeExtraneousValues: true })
@@ -29,6 +31,15 @@ export const useFetchApi = <R, T = {}>(classTransformer: ClassConstructor<T> = n
             }
 
             const { clearStore } = useAuthStore()
+            const getValidationErrors = () => {
+                const errors = {} as Record<string, string>
+                if (e?.response?._data && Array.isArray(e.response._data)) {
+                    e.response._data.forEach(item => {
+                        errors[item.field] = item.message;
+                    });
+                }
+                return errors;
+            }
             if (e.response && e.response.status === 401) {
                 return handleRefreshToken(e, url, config, customConfig)?.catch((e) => {
                     console.error("error in refresh", e)
@@ -36,6 +47,15 @@ export const useFetchApi = <R, T = {}>(classTransformer: ClassConstructor<T> = n
                     goToLoginIfYouShould(customConfig);
                 }) as unknown as R;
 
+            } else if (e.response && e.response.status == 422) {
+                // console.log("e", e.response)
+                if (customConfig.setErrors) {
+                    customConfig.setErrors(getValidationErrors())
+                }
+                if (customConfig.onValidationFailed) {
+                    customConfig.onValidationFailed(getValidationErrors(), e);
+                }
+                return;
             }
         })
     }

@@ -90,7 +90,11 @@
               </h6>
               <div class="my-3">
                 <template v-if="authStore.isLoggedIn">
-                  <div>فرم ثبت نظر در اینجا قرار می گیرد</div>
+                  <div>
+                    <course-comment-form
+                      :courseID="data.id"
+                    ></course-comment-form>
+                  </div>
                 </template>
                 <template v-else>
                   <p
