@@ -18,4 +18,9 @@ onMounted(() => {
   authStore.fetchAndSetIdentityIfLoggedIn();
 });
 const { loginModel } = useLoginDialog();
+useHead({
+  titleTemplate: (titleChunk) => {
+    return titleChunk ? `${titleChunk}-acanet` : "آکادمی لند";
+  },
+});
 </script>

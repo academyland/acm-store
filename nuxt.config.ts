@@ -7,6 +7,24 @@ export default defineNuxtConfig({
     modules: [
         '@pinia/nuxt',
     ],
+    // app: {
+    //     head: {
+    //         "meta": [
+    //             {
+    //                 "name": "viewport",
+    //                 "content": "width=device-width, initial-scale=1"
+    //             },
+    //             {
+    //                 "charset": "utf-8"
+    //             }
+    //         ],
+    //         titleTemplate: '%s-academyLand',
+    //         "link": [],
+    //         "style": [],
+    //         "script": [],
+    //         "noscript": []
+    //     }
+    // },
     postcss: {
         plugins: {
             tailwindcss: {},

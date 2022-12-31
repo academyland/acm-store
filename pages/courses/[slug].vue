@@ -184,6 +184,15 @@ const { open: openLoginDialog } = useLoginDialog();
 const authStore = useAuthStore();
 const route = useRoute();
 const { data, pending } = useCourseDetail(route.params.slug as string);
+useHead({
+  title: computed(() => unref(data)?.title || ""),
+  meta: [
+    {
+      name: "description",
+      content: computed(() => unref(data)?.meta_description || ""),
+    },
+  ],
+});
 const hasChapter = computed(() => unref(data)?.courseChapters?.length! > 0);
 // const { canBuy, loading } = useCanBuyConsumer();
 // watchEffect(() => {

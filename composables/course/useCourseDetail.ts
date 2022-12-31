@@ -37,7 +37,7 @@ export const useCourseDetail = (slug: string) => {
     const { data, pending } = useLazyAsyncData(
         "course-detail" + slug,
         () => getCourseDetail(slug),
-        { server: false }
+        { server: true }
     );
     const courseID = computed(() => unref(data)?.id)
     useCanBuyProvider(courseID);

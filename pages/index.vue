@@ -76,23 +76,30 @@ import { gsap } from "gsap";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import { useCourseList } from "~/composables/course/useCourse";
 const completeAnimation = ref(false);
+useHead({
+  title: "آموزش vue js - nuxt js",
+  meta: [
+    {
+      name: "description",
+      content: "آموزش ناکست سه بصورت پروژه محور",
+    },
+  ],
+});
 onMounted(() => {
-  setTimeout(() => {
-    gsap.registerPlugin(ScrollToPlugin);
-    //@ts-ignore
-    const tl = new gsap.timeline();
-    tl.from(".g-head-anime", {
-      ease: "power4",
-      duration: 0.8,
-      autoAlpha: 0,
-      x: 200,
-      stagger: 0.3,
-      onComplete: () => {
-        completeAnimation.value = true;
-        gsap.set(".g-head-anime", { clearProps: "transform" });
-      },
-    });
-  }, 300);
+  gsap.registerPlugin(ScrollToPlugin);
+  //@ts-ignore
+  const tl = new gsap.timeline();
+  tl.from(".g-head-anime", {
+    ease: "power4",
+    duration: 0.8,
+    autoAlpha: 0,
+    x: 200,
+    stagger: 0.3,
+    onComplete: () => {
+      completeAnimation.value = true;
+      gsap.set(".g-head-anime", { clearProps: "transform" });
+    },
+  });
 });
 const clickGetStart = () => {
   gsap.to(window, {
