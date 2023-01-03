@@ -57,6 +57,16 @@ export const useFetchApi = <R, T = {}>(classTransformer: ClassConstructor<T> = n
                 }
                 return;
             }
+            else {
+                if ((config.method || '').toLowerCase() == 'get' || !config.method) {
+                    showError({
+                        statusMessage: e?.response?.statusText || 'خطایی رخ داده است',
+                        statusCode: e.response.status || 500,
+                    })
+                } else {
+                    //TODO show toast
+                }
+            }
         })
     }
     function goToLoginIfYouShould(fetchCustomConfig: FetchCustomConfig) {

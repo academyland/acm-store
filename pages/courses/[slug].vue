@@ -183,7 +183,7 @@ import { numberFormat } from "~~/helpers/formatHelper";
 const { open: openLoginDialog } = useLoginDialog();
 const authStore = useAuthStore();
 const route = useRoute();
-const { data, pending } = useCourseDetail(route.params.slug as string);
+const { data, pending } = await useCourseDetail(route.params.slug as string);
 useHead({
   title: computed(() => unref(data)?.title || ""),
   meta: [

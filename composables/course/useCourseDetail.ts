@@ -32,18 +32,19 @@ export const useCanBuyConsumer = () => {
     }
     return toRefs(userCanBuy!)
 }
-export const useCourseDetail = (slug: string) => {
+export const useCourseDetail = async (slug: string) => {
     const getCourseDetail = useCourseDetailService();
-    const { data, pending } = useLazyAsyncData(
+    const courseID = ref();
+    useCanBuyProvider(courseID);
+    const { data, pending, error } = await useLazyAsyncData(
         "course-detail" + slug,
         () => getCourseDetail(slug),
         { server: true }
     );
-    const courseID = computed(() => unref(data)?.id)
-    useCanBuyProvider(courseID);
-    watchEffect(() => {
-        console.log("data", data.value)
-    })
+    useErrorHandler(error);
+    watch(data, () => {
+        courseID.value = unref(data)?.id
+    }, { immediate: true })
     return { data, pending }
 }
 export const useVideoItem = (item: Ref<CourseVideo>) => {
