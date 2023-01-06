@@ -26,4 +26,7 @@ export class CourseDto extends BaseCourseDto {
     get showAmount() {
         return this.amount > this.amountOff
     }
+    set showAmount(value) {
+
+    }
 }

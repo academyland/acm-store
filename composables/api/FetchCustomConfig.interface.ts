@@ -8,4 +8,7 @@ export interface FetchCustomConfig {
     setErrors?: (errors: { [key: string]: string }) => void;
     // transformer?: (data: any) => any;
     goToLogin?: boolean;
+    beforeResponse?: Function;
+    debug?: boolean;
+    toastValidationFields?: string[]
 }
