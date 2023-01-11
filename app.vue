@@ -13,7 +13,9 @@
 import { useAuthStore } from "./composables/auth/Auth.store";
 import Auth from "./pages/auth.vue";
 import { useLoginDialog } from "~/composables/auth/login/useLoginDialog";
+import { useCartStore } from "./composables/cart/cart.store";
 const authStore = useAuthStore();
+const cartStore=useCartStore();
 onMounted(() => {
   authStore.fetchAndSetIdentityIfLoggedIn();
 });

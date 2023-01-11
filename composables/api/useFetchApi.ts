@@ -1,5 +1,5 @@
 import { ClassConstructor, plainToInstance, instanceToPlain } from "class-transformer"
-// import { FetchError, FetchOptions } from "ohmyfetch"
+import queryString from 'query-string';
 import { FetchError, FetchOptions } from "ofetch"
 import { useAuthStore } from "../auth/Auth.store"
 import { BASE_URL } from "./api.config"
@@ -20,6 +20,10 @@ export const useFetchApi = <R, T = {}>(classTransformer: ClassConstructor<T> = n
             config.headers['Authorization'] = `Bearer ${authStore.getToken}`
         }
 
+        if (config.params) {
+            url = url + '?' + queryString.stringify(config.params, { arrayFormat: 'bracket' })
+            delete config.params;
+        }
         //@ts-ignore
         return $fetch<R>(url, config)
             .then((res) => {
