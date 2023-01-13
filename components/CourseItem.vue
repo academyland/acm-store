@@ -42,7 +42,8 @@
 
         <div class="flex items-center justify-between mt-3">
           <div class="prose-xs 3xl:prose-2xs text-secondary">
-            {{ item.statusText }}
+            <!-- {{ item.statusText }} -->
+            <add-to-cart-button :id="item.id"></add-to-cart-button>
           </div>
           <div class="prose-xs 3xl:prose-2xs">
             <div class="t-row space-x-3 space-x-reverse">
