@@ -35,6 +35,9 @@
           <template v-else>
             <the-menu-auth></the-menu-auth>
           </template>
+          <template v-if="cartStore.fetchedOnce&&cartStore.getCartCount>0">
+          {{ cartStore.getCartCount }}
+          </template>
         </client-only>
 
         <router-link class="!text-gray-600 font-bold" to="/">
@@ -51,7 +54,8 @@ import { defineComponent } from "vue";
 import { useMenu } from "~/composables/useMenu";
 import { useAuthStore } from "~~/composables/auth/Auth.store";
 import { useLoginDialog } from "~~/composables/auth/login/useLoginDialog";
-
+import { useCartStore } from "~~/composables/cart/cart.store";
+const cartStore=useCartStore();
 const links = [
   {
     title: "صفحه اصلی",

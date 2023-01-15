@@ -1,3 +1,4 @@
+import { useCartStore } from "~~/composables/cart/cart.store";
 import { ToastEnum } from "~~/types";
 import { useAuthStore } from "../Auth.store";
 import { useLoginService } from "./login.service";
@@ -18,10 +19,11 @@ export const useLogin = () => {
     };
     const { showToast } = useToast()
     const router = useRouter()
+    const cartStore = useCartStore();
     const submit = (values) => {
         loading.value = true;
         error.value = "";
-        login(values, { ignoreErrors: true, onError })
+        login(values, { ignoreErrors: true, onError }, cartStore.getCartIDs)
             .then((response) => {
                 if (response != undefined) {
                     store.setToken(response.tokens);

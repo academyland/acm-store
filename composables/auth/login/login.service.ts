@@ -8,7 +8,7 @@ import { useLoginValidator } from "./login.validator";
 export const useLoginService = () => {
     const fetchData = useFetchApi<{ tokens: AuthTokens, identity: Identity }, LoginDto>(LoginDto)
     const { schema } = useLoginValidator()
-    const login = ({ username, password }: InferType<typeof schema>, customConfig: FetchCustomConfig = {}) =>
+    const login = ({ username, password }: InferType<typeof schema>, customConfig: FetchCustomConfig = {}, cartData) =>
 
         fetchData("/oauth2/rest/token", {
             method: "post",
@@ -18,6 +18,7 @@ export const useLoginService = () => {
                 grant_type: 'password',
                 client_id: CLIENT_ID,
                 client_secret: CLIENT_SECRET,
+                // cart: cartData
             }
         }, customConfig).then((response: any) => {
             if (response !== undefined) {

@@ -43,7 +43,12 @@
         <div class="flex items-center justify-between mt-3">
           <div class="prose-xs 3xl:prose-2xs text-secondary">
             <!-- {{ item.statusText }} -->
-            <add-to-cart-button :id="item.id"></add-to-cart-button>
+            <client-only>
+            <template v-if="cartStore.fetchedOnce">
+              <add-to-cart-button  v-if="!cartStore.isExistInTheCart(item.id)" :id="item.id"></add-to-cart-button>
+              <delete-from-cart v-else :id="item.id"></delete-from-cart>
+            </template>
+            </client-only>
           </div>
           <div class="prose-xs 3xl:prose-2xs">
             <div class="t-row space-x-3 space-x-reverse">
@@ -67,6 +72,7 @@
 import { computed, defineComponent, PropType } from "vue";
 import { numberFormat } from "~/helpers/formatHelper";
 import { CourseDto } from "~/composables/course/course.dto";
+import { useCartStore } from "~~/composables/cart/cart.store";
 interface Props {
   item: CourseDto;
   hasDefaultWith?: boolean;
@@ -84,4 +90,5 @@ const getAmount = computed(() => {
   }
   return numberFormat(props.item.amountOff) + " تومان ";
 });
+const cartStore=useCartStore();
 </script>
