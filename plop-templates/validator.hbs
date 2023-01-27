@@ -1,0 +1,15 @@
+import { object, string } from "yup";
+
+export const use{{pascalCase name}}Validator = () => {
+    const { $t } = useNuxtApp();
+    const {{camelCase name}}Schema = object({
+        {{#each (parseFields fields)}}
+        {{#if this.isRequired}}
+            {{this.attribute}}: string().required().label($t("{{this.attribute}}")),
+       {{else}}
+           {{this.attribute}}: string().label($t("{{this.attribute}}")),
+       {{/if}}
+     {{/each}}
+    });
+    return {  {{camelCase name}}Schema }
+}

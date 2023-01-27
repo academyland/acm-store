@@ -4,12 +4,14 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "g": "plop"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.1",
     "autoprefixer": "^10.4.2",
     "nuxt": "3.0.0",
+    "plop": "^3.1.1",
     "postcss": "^8.4.6",
     "tailwindcss": "^3.0.18"
   },
