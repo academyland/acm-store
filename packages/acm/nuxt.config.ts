@@ -7,6 +7,9 @@ export default defineNuxtConfig({
     modules: [
         '@pinia/nuxt',
     ],
+    extends: [
+        '../../base-layer'
+    ],
     // app: {
     //     head: {
     //         "meta": [
