@@ -4,7 +4,6 @@ import { FetchError, FetchOptions } from "ofetch"
 import { useAuthStore } from "../auth/Auth.store"
 import { BASE_URL } from "./api.config"
 import { FetchCustomConfig } from "./FetchCustomConfig.interface"
-import "reflect-metadata"
 import { ToastEnum } from "~~/types"
 export const useFetchApi = <R, T = {}>(classTransformer: ClassConstructor<T> = null as unknown as ClassConstructor<T>) => {
     const router = useRouter();
