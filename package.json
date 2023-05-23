@@ -27,6 +27,7 @@
     "query-string": "^8.1.0",
     "querystringify": "^2.2.0",
     "reflect-metadata": "^0.1.13",
+    "socket.io-client": "^4.6.1",
     "vee-validate": "^4.5.8",
     "yup": "^0.32.11"
   }
