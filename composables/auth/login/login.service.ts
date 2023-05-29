@@ -6,7 +6,7 @@ import { AuthTokens, Identity } from "../Auth.interface"
 import { LoginDto } from "./Login.dto";
 import { useLoginValidator } from "./login.validator";
 export const useLoginService = () => {
-    const fetchData = useFetchApi<{ tokens: AuthTokens, identity: Identity }, LoginDto>(LoginDto)
+    const fetchData = useFetchApi<LoginDto, LoginDto>(LoginDto)
     const { schema } = useLoginValidator()
     const login = ({ username, password }: InferType<typeof schema>, customConfig: FetchCustomConfig = {}, cartData) =>
 
@@ -20,7 +20,7 @@ export const useLoginService = () => {
                 client_secret: CLIENT_SECRET,
                 // cart: cartData
             }
-        }, customConfig).then((response: any) => {
+        }, customConfig).then((response) => {
             if (response !== undefined) {
                 const { access_token, refresh_token, expires_in, identity } = response
                 return {
