@@ -1,6 +1,6 @@
 <template>
   <div>
-  <template v-if="isAuthRoute">
+  <template v-if="clientRender">
   <client-only>
     <nuxt-layout>
       <nuxt-page></nuxt-page>
@@ -31,6 +31,10 @@ onMounted(() => {
   authStore.fetchAndSetIdentityIfLoggedIn();
 });
 const {isAuthRoute}=useAuthWrapper()
+const clientRender=ref(false);
+if(process.server&&unref(isAuthRoute)){
+ clientRender.value=true;
+}
 const { loginModel } = useLoginDialog();
 useHead({
   titleTemplate: (titleChunk) => {
